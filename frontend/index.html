@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueryGen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>QueryGen</h1>
+        <p>Ask questions in natural language and get SQL-powered insights.</p>
+        <textarea
+            id="question"
+            placeholder="Example: Show top 5 customers by spending">
+        </textarea>
+        <button onclick="runQuery()">
+            Generate Query
+        </button>
+        <div class="section">
+            <h2>Generated SQL</h2>
+            <pre id="sql"></pre>
+        </div>
+        <div class="section">
+            <h2>Results</h2>
+            <pre id="results"></pre>
+        </div>
+        <h2>Query History</h2>
+        <div class="card">
+            <ul id="history"></ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
