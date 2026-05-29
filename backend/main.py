@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from database import get_connection
 from sql_generator import generate_sql
 
@@ -7,6 +8,13 @@ app = FastAPI(
     title="QueryGen API",
     description="AI-Powered Natural Language to SQL Generator",
     version="1.0"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 class Question(BaseModel):
@@ -43,6 +51,18 @@ def get_customers():
 
 @app.post("/query")
 def query(data: Question):
+    
+    try:
+
+        sql = generate_sql(data.question)
+
+    except Exception:
+
+        return {
+
+            "error": "Gemini API quota exceeded. Please try again later."
+
+        }
 
     sql = generate_sql(data.question)
 
